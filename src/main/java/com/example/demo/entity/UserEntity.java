@@ -56,10 +56,4 @@ public class UserEntity  {
 	 */
 	@Column(name = "create_date")
 	private Date createDate;
-
-	/**
-	 * 削除日時
-	 */
-	@Column(name = "delete_date")
-	private Date deleteDate;
 }

@@ -28,7 +28,6 @@
           <td th:text="*{phone}"></td>
           <td th:text="${#dates.format(user.updateDate, 'yyyy/MM/dd')}"></td>
           <td th:text="${#dates.format(user.createDate, 'yyyy/MM/dd')}"></td>
-          <td th:text="${#dates.format(user.deleteDate, 'yyyy/MM/dd')}"></td>
           <td><a th:href="@{/user/{id}(id=*{id})}" class="btn btn-secondary">詳細</a></td>
         </tr>
       </tbody>
