@@ -39,7 +39,7 @@ public class UserController {
 	 * @return ユーザー情報一覧画面のHTML
 	 */
 	@RequestMapping("/user/list")
-	public String displayList(Model model) {
+	public String userList(Model model) {
 		List<UserEntity> userlist = userService.searchAll();
 		model.addAttribute("userlist", userlist);
 		return "user/list";
@@ -50,7 +50,7 @@ public class UserController {
 	 * @return ユーザー情報一覧画面
 	 */
 	@RequestMapping("/user/add")
-	public String displayAdd(Model model) {
+	public String userRegister(Model model) {
 		model.addAttribute("userRequest", new UserRequest());
 		return "user/add";
 	}
@@ -62,7 +62,7 @@ public class UserController {
 	 * @return ユーザー情報一覧画面
 	 */
 	@RequestMapping("/user/create")
-	public String create(@Validated @ModelAttribute UserRequest userRequest, BindingResult result, Model model) {
+	public String userCreate(@Validated @ModelAttribute UserRequest userRequest, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			// 入力チェックエラーの場合
 			List<String> errorList = new ArrayList<String>();
@@ -83,7 +83,7 @@ public class UserController {
 	 * @return ユーザー情報詳細画面
 	 */
 	@GetMapping("/user/{id}")
-	public String displayView(@PathVariable Integer id, Model model) {
+	public String userDetail(@PathVariable Integer id, Model model) {
 		UserEntity user = userService.findById(id);
 		model.addAttribute("userData", user);
 		return "user/view";
@@ -96,7 +96,7 @@ public class UserController {
 	 * @return ユーザー編集画面
 	 */
 	@GetMapping("/user/{id}/edit")
-	public String displayEdit(@PathVariable Integer id, Model model) {
+	public String userEdit(@PathVariable Integer id, Model model) {
 		UserEntity user = userService.findById(id);
 		UserUpdateRequest userUpdateRequest = new UserUpdateRequest();
 		userUpdateRequest.setId(user.getId());
@@ -113,7 +113,7 @@ public class UserController {
 	 * @return ユーザー情報詳細画面
 	 */
 	@RequestMapping("/user/update")
-	public String update(@Validated @ModelAttribute UserUpdateRequest userUpdateRequest, BindingResult result, Model model) {
+	public String userUpdate(@Validated @ModelAttribute UserUpdateRequest userUpdateRequest, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			List<String> errorList = new ArrayList<String>();
 			for (ObjectError error : result.getAllErrors()) {
@@ -134,7 +134,7 @@ public class UserController {
 	 * @return ユーザー情報詳細画面
 	 */
 	@GetMapping("/user/{id}/delete")
-	public String delete(@PathVariable Integer id, Model model) {
+	public String userDelete(@PathVariable Integer id, Model model) {
 		// ユーザー情報の削除
 		userService.delete(id);
 		return "redirect:/user/list";
